@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace CustomMiddleware.Middleware {
 
-    public static class MiddlewareExtensions
-    {
+    public static class MiddlewareExtensions {
         public static IApplicationBuilder UseMyMiddleware(this IApplicationBuilder builder) {
             return builder.UseMiddleware<MyMiddleware>();
         }
     }
-    
+
 }
