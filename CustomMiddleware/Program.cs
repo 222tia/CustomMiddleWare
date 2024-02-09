@@ -1,3 +1,5 @@
+using CustomMiddleware.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,20 +20,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.Use(async (context, _next) => {
-        
-    var username = context.Request.Query["username"];
-    var password = context.Request.Query["password"];
-
-    // enter localhost:5244/?username=user1&password=password1 in search bar 
-    if (username != "user1" || password != "password1") {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Not authorized.");
-    } else {
-        await _next(context);
-    }
-
-});
+app.UseMyMiddleware();
 
 app.UseAuthorization();
 
